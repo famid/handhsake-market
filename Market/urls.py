@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path, include
+from gunicorn.app.pasterapp import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('handshake_market.urls')),
     path('', include('user_auth.urls')),
     path('', include('ledger.urls')),
+
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
