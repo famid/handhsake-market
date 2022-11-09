@@ -1,0 +1,24 @@
+{% extends 'handshake_market/base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}
+    Cash In
+{% endblock %}
+
+{% block content %}
+    <body class="text-center">
+        <div class="container" style="margin-top: 20px">
+            <form method="POST" class="form-login" style="color:white" action="">
+
+                <h1 class="h3 mb-3 font-weight-normal">
+                    Add money to your account.
+                </h1>
+                <br>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+            </form>
+        </div>
+    </body>
+
+{% endblock %}
